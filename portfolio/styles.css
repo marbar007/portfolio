@@ -1,0 +1,1272 @@
+/* =========================================================================
+   MARCELA FIGUEROA DELGADO — portfolio
+   Scrapbook / early-2000s magazine cutout system.
+   Every color and font used in the body of this file comes from the token
+   block below. No one-off hex values past this point.
+   ========================================================================= */
+
+:root {
+  /* --- paper & print palette --- */
+  --paper: #EFE7D6;
+  --paper-2: #F7F2E4;
+  --ink: #191512;
+  --red: #E02B32;
+  --cyan: #00A6C7;
+  --acid: #C6FF00;
+  --hot: #FF3DA1;
+  --tape: rgba(226, 214, 180, 0.72);
+
+  /* derived / structural */
+  --ink-soft: rgba(25, 21, 18, 0.72);
+  --shadow-paper: 3px 4px 0 rgba(25, 21, 18, 0.28);
+  --shadow-paper-lift: 6px 9px 0 rgba(25, 21, 18, 0.34);
+  --border-hairline: 1px solid var(--ink);
+
+  /* type */
+  --f-display: "Anton", "Archivo Black", sans-serif;
+  --f-heavy: "Archivo Black", sans-serif;
+  --f-didone: "Playfair Display", "Times New Roman", serif;
+  --f-mono: "Courier Prime", "Courier New", monospace;
+  --f-marker: "Caveat", cursive;
+  --f-body: "Times New Roman", Times, serif;
+
+  /* motion */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-tape: 240ms;
+  --dur-flip: 700ms;
+}
+
+/* =========================================================================
+   Reset
+   ========================================================================= */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-body);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* =========================================================================
+   Paper grain overlay — procedural noise via inline SVG filter, no bitmap
+   asset required. Sits above everything, multiplies, ignores pointer.
+   ========================================================================= */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  opacity: 0.09;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.098  0 0 0 0 0.082  0 0 0 0 0.070  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-repeat: repeat;
+}
+
+/* =========================================================================
+   Halftone helper — used behind photo elements
+   ========================================================================= */
+.halftone {
+  position: relative;
+}
+.halftone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, var(--ink) 1px, transparent 1.2px);
+  background-size: 5px 5px;
+  opacity: 0.16;
+  mix-blend-mode: multiply;
+}
+
+/* =========================================================================
+   Torn / cut paper cards
+   ========================================================================= */
+.card {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  position: relative;
+  padding: 1.2rem 1.4rem;
+}
+
+.torn-1 { clip-path: polygon(0% 2%, 6% 0%, 14% 3%, 22% 0%, 31% 2%, 40% 0%, 49% 3%, 58% 0%, 67% 2%, 76% 0%, 85% 3%, 94% 0%, 100% 2%, 100% 97%, 92% 100%, 84% 97%, 76% 100%, 68% 97%, 60% 100%, 52% 97%, 44% 100%, 36% 97%, 28% 100%, 20% 97%, 12% 100%, 4% 97%, 0% 100%); }
+.torn-2 { clip-path: polygon(2% 0%, 100% 0%, 98% 4%, 100% 9%, 97% 15%, 100% 22%, 98% 30%, 100% 100%, 0% 100%, 2% 92%, 0% 84%, 3% 76%, 0% 66%, 2% 55%, 0% 40%, 3% 20%, 0% 6%); }
+.torn-3 { clip-path: polygon(0 0, 96% 0, 100% 6%, 94% 12%, 100% 18%, 95% 24%, 100% 30%, 100% 100%, 4% 100%, 0 94%, 5% 88%, 0 82%, 4% 74%, 0 60%, 0 0); }
+
+/* corner tape — pseudo elements, peel on hover */
+.tape { position: relative; }
+.tape::before,
+.tape::after {
+  content: "";
+  position: absolute;
+  width: 64px;
+  height: 26px;
+  background: var(--tape);
+  box-shadow: 0 1px 0 rgba(25, 21, 18, 0.15);
+  transform-origin: top left;
+  transition: transform var(--dur-tape) var(--ease-spring), box-shadow var(--dur-tape) var(--ease-spring);
+  z-index: 2;
+}
+.tape::before { top: -12px; left: -10px; transform: rotate(-6deg); }
+.tape::after  { top: -12px; right: -10px; left: auto; transform: rotate(7deg); transform-origin: top right; }
+
+.tape:hover::before,
+.tape:focus-within::before {
+  transform: rotate(-38deg) translateY(-4px);
+  box-shadow: 4px 10px 6px rgba(25, 21, 18, 0.32);
+}
+.tape:hover::after,
+.tape:focus-within::after {
+  transform: rotate(40deg) translateY(-4px);
+  box-shadow: -4px 10px 6px rgba(25, 21, 18, 0.32);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tape::before, .tape::after { transition: none; }
+  .tape:hover::before, .tape:hover::after,
+  .tape:focus-within::before, .tape:focus-within::after {
+    transform: none;
+  }
+}
+
+/* =========================================================================
+   Language toggle — magazine cover flag
+   ========================================================================= */
+.lang-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  background: var(--ink);
+  color: var(--paper-2);
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  padding: 0.5em 0.8em;
+  transform: rotate(-2deg);
+  box-shadow: var(--shadow-paper);
+}
+.lang-toggle-label { opacity: 0.75; }
+.lang-btn {
+  background: transparent;
+  border: 1px solid var(--paper-2);
+  padding: 0.15em 0.5em;
+  cursor: pointer;
+  color: var(--paper-2);
+}
+.lang-btn.is-active {
+  background: var(--acid);
+  color: var(--ink);
+  border-color: var(--acid);
+}
+.lang-slash { opacity: 0.6; }
+
+/* =========================================================================
+   Running footer strip
+   ========================================================================= */
+.footer-strip {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 600;
+  background: var(--ink);
+  color: var(--paper-2);
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5em 1em;
+  gap: 1em;
+}
+.footer-strip .page-num { font-weight: bold; color: var(--acid); }
+.footer-strip .section-name { flex: 1; text-align: center; text-transform: uppercase; }
+
+.barcode-mini {
+  width: 70px;
+  height: 22px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--paper-2) 0px, var(--paper-2) 2px,
+    transparent 2px, transparent 3px,
+    var(--paper-2) 3px, var(--paper-2) 4px,
+    transparent 4px, transparent 6px,
+    var(--paper-2) 6px, var(--paper-2) 9px,
+    transparent 9px, transparent 10px
+  );
+  flex-shrink: 0;
+}
+
+/* =========================================================================
+   App shell / spread container + page-flip mechanics
+   ========================================================================= */
+#app {
+  position: relative;
+  min-height: 100vh;
+  perspective: 2400px;
+}
+
+.spread {
+  display: none;
+  position: relative;
+  min-height: 100vh;
+  padding: 5rem 1.5rem 4rem;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform var(--dur-flip) ease-in-out, opacity 200ms ease;
+}
+.spread.is-active { display: block; }
+
+/* while a flip is in progress, both the outgoing and incoming spread are
+   stacked in the same box so they can rotate through each other */
+#app.is-flipping .spread.is-active {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+/* back-of-page texture, revealed once a spread has rotated past 90deg */
+.spread::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--paper-2);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='matrix' values='0 0 0 0 0.098  0 0 0 0 0.082  0 0 0 0 0.070  0 0 0 0.9 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-blend-mode: multiply;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  z-index: 30;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spread { transition: opacity 200ms ease; }
+}
+
+/* =========================================================================
+   COVER SPREAD
+   ========================================================================= */
+.spread--cover.is-active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.name-block {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 900px;
+}
+
+/* --- the cutout name: built in HTML, not an image --- */
+.cutout-name {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.15em;
+  margin: 0;
+  line-height: 1;
+}
+
+.cl {
+  display: inline-block;
+  font-size: clamp(2.6rem, 11vw, 6.2rem);
+  padding: 0.08em 0.22em;
+  box-shadow: var(--shadow-paper);
+  transition: transform 160ms ease;
+  will-change: transform;
+}
+
+.cl:hover { transform: var(--cl-rot, rotate(0deg)) scale(1.03) translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cl { transition: none; }
+  .cl:hover { transform: var(--cl-base, none); }
+}
+
+.cl--m {
+  font-family: var(--f-display);
+  background: var(--ink);
+  color: var(--paper-2);
+  --cl-rot: rotate(-7deg);
+  transform: rotate(-6deg) translateY(2px);
+}
+.cl--a1 {
+  font-family: var(--f-didone);
+  font-style: italic;
+  background: var(--red);
+  color: var(--paper-2);
+  --cl-rot: rotate(3deg);
+  transform: rotate(4deg) translateY(-6px);
+  font-size: clamp(2.2rem, 9.5vw, 5.4rem);
+}
+.cl--r {
+  font-family: var(--f-heavy);
+  background: var(--paper-2);
+  color: var(--ink);
+  clip-path: polygon(4% 0%, 92% 4%, 100% 22%, 96% 55%, 100% 88%, 88% 100%, 40% 96%, 6% 100%, 0% 62%, 8% 30%);
+  --cl-rot: rotate(-2deg);
+  transform: rotate(-3deg) translateY(4px);
+  box-shadow: var(--shadow-paper-lift);
+}
+.cl--c {
+  font-family: var(--f-display);
+  background: var(--cyan);
+  color: var(--ink);
+  --cl-rot: rotate(8deg);
+  transform: rotate(7deg) translateY(8px);
+}
+.cl--e {
+  font-family: var(--f-didone);
+  background: transparent;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--ink);
+  box-shadow: none;
+  --cl-rot: rotate(-6deg);
+  transform: rotate(-5deg) translateY(-3px);
+  font-size: clamp(2.8rem, 11.5vw, 6.6rem);
+}
+.cl--l {
+  font-family: var(--f-heavy);
+  background: var(--hot);
+  color: var(--paper-2);
+  --cl-rot: rotate(4deg);
+  transform: rotate(3deg) translateY(0px);
+  font-size: clamp(2.1rem, 8.5vw, 5rem);
+}
+.cl--a2 {
+  font-family: var(--f-display);
+  background: var(--acid);
+  color: var(--ink);
+  clip-path: polygon(0% 8%, 10% 0%, 30% 5%, 55% 0%, 78% 6%, 100% 0%, 96% 35%, 100% 60%, 94% 100%, 62% 94%, 35% 100%, 12% 92%, 0% 100%, 6% 55%);
+  --cl-rot: rotate(-3deg);
+  transform: rotate(-4deg) translateY(-5px);
+  box-shadow: var(--shadow-paper-lift);
+}
+
+.surname {
+  margin: 0.6em 0 0;
+  font-family: var(--f-mono);
+  font-size: clamp(0.85rem, 2.4vw, 1.35rem);
+  letter-spacing: 0.42em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.tagline {
+  margin: 0.9em 0 0;
+  font-family: var(--f-marker);
+  font-size: clamp(1.3rem, 3.2vw, 2rem);
+  color: var(--red);
+  transform: rotate(-2deg);
+}
+
+/* --- cover flags scattered along the edges --- */
+.cover-flags {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+.flag {
+  position: absolute;
+  font-family: var(--f-heavy);
+  font-size: clamp(0.85rem, 1.6vw, 1.05rem);
+  line-height: 1.15;
+  max-width: 190px;
+  padding: 0.6em 0.8em;
+  pointer-events: auto;
+}
+.flag--1 { top: 8%;  left: 3%;  background: var(--ink); color: var(--paper-2); transform: rotate(-4deg); box-shadow: var(--shadow-paper); }
+.flag--2 { top: 26%; left: 1.5%; background: var(--paper-2); color: var(--ink); transform: rotate(3deg);
+  clip-path: polygon(0 6%, 90% 0, 100% 20%, 96% 60%, 100% 92%, 60% 100%, 20% 96%, 0 70%);
+  box-shadow: var(--shadow-paper); font-family: var(--f-mono); font-size: 0.78rem; letter-spacing: 0.02em; }
+.flag--3 { bottom: 20%; left: 2%; background: var(--red); color: var(--paper-2); transform: rotate(4deg); box-shadow: var(--shadow-paper); }
+.flag--4 { top: 10%; right: 2.5%; background: var(--cyan); color: var(--ink); transform: rotate(3deg); box-shadow: var(--shadow-paper); }
+.flag--5 {
+  top: 46%; left: 2.2%; background: var(--paper-2); color: var(--ink); transform: rotate(-3deg);
+  box-shadow: var(--shadow-paper);
+  border: 3px solid var(--red);
+  border-radius: 50% 48% 52% 46% / 55% 45% 55% 45%;
+  font-family: var(--f-marker);
+  font-size: clamp(1rem, 1.9vw, 1.2rem);
+}
+
+/* --- corner stamp: barcode / issue / place / year --- */
+.corner-stamp {
+  position: absolute;
+  bottom: 6.5rem;
+  right: 1.2rem;
+  z-index: 8;
+  text-align: right;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--ink);
+}
+.barcode {
+  width: 120px;
+  height: 34px;
+  margin-left: auto;
+  margin-bottom: 0.3em;
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0px, var(--ink) 2px,
+    transparent 2px, transparent 4px,
+    var(--ink) 4px, var(--ink) 5px,
+    transparent 5px, transparent 8px,
+    var(--ink) 8px, var(--ink) 11px,
+    transparent 11px, transparent 12px,
+    var(--ink) 12px, var(--ink) 13px,
+    transparent 13px, transparent 16px
+  );
+}
+
+/* --- flip-me marker annotation with hand-drawn arrow --- */
+.flip-hint {
+  position: absolute;
+  bottom: 9.5rem;
+  right: 1.4rem;
+  z-index: 8;
+  text-decoration: none;
+}
+.flip-hint-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--f-marker);
+  font-style: normal;
+  font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+  color: var(--ink);
+  transform: rotate(-3deg);
+  transform-origin: center;
+}
+.flip-hint-inner svg { width: 46px; height: 32px; flex-shrink: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .flip-hint-inner { animation: bob 2.4s ease-in-out infinite; }
+}
+@keyframes bob {
+  0%, 100% { transform: rotate(-3deg) translateY(0); }
+  50% { transform: rotate(-3deg) translateY(-4px); }
+}
+
+/* =========================================================================
+   Page-turn controls — persistent paper-curl buttons, bottom corners of
+   every spread. Fixed to the viewport, not the spread, so they never need
+   to be duplicated per section.
+   ========================================================================= */
+.page-turn {
+  position: fixed;
+  bottom: 40px;
+  z-index: 700;
+  width: 56px;
+  height: 56px;
+  border: none;
+  background: var(--paper-2);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: var(--shadow-paper);
+  font-family: var(--f-heavy);
+  font-size: 1.4rem;
+  line-height: 1;
+  display: flex;
+  transition: transform 160ms var(--ease-spring);
+}
+.page-turn--prev {
+  left: 0;
+  clip-path: polygon(0 100%, 0 25%, 75% 100%);
+  justify-content: flex-start;
+  align-items: flex-end;
+  padding: 0 0 8px 8px;
+}
+.page-turn--next {
+  right: 0;
+  clip-path: polygon(100% 100%, 100% 25%, 25% 100%);
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 8px 8px 0;
+}
+.page-turn:hover,
+.page-turn:focus-visible {
+  transform: translateY(-6px);
+}
+.page-turn[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .page-turn { transition: none; }
+}
+
+/* =========================================================================
+   Reusable bilingual cut-out header — same treatment as the cover name,
+   scaled down, for section headers. Letters are generated in main.js from
+   data-en/data-es on the .cutout-header element so it can carry copy of
+   different lengths per language; CSS just cycles six looks by position.
+   ========================================================================= */
+.section-header {
+  margin: 0 0 1.6rem;
+  line-height: 1;
+}
+.cutout-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.08em;
+  margin: 0;
+}
+.ch {
+  display: inline-block;
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  padding: 0.06em 0.18em;
+  box-shadow: var(--shadow-paper);
+}
+.ch:nth-child(6n+1) { font-family: var(--f-display); background: var(--ink); color: var(--paper-2); transform: rotate(-4deg); }
+.ch:nth-child(6n+2) { font-family: var(--f-didone); font-style: italic; background: var(--red); color: var(--paper-2); transform: rotate(3deg); }
+.ch:nth-child(6n+3) { font-family: var(--f-heavy); background: var(--paper-2); color: var(--ink); transform: rotate(-2deg); }
+.ch:nth-child(6n+4) { font-family: var(--f-display); background: var(--cyan); color: var(--ink); transform: rotate(4deg); }
+.ch:nth-child(6n+5) { font-family: var(--f-heavy); background: var(--hot); color: var(--paper-2); transform: rotate(-3deg); }
+.ch:nth-child(6n+0) { font-family: var(--f-display); background: var(--acid); color: var(--ink); transform: rotate(2deg); }
+.ch.ch--space { background: transparent; box-shadow: none; transform: none; padding: 0; width: 0.4em; }
+
+/* =========================================================================
+   Draggable stickers / photos / thumbnails — pointer events, not the HTML5
+   drag API. Position is tracked in --drag-x/--drag-y custom properties so
+   each element's own designed rotation (--base-rotate) is untouched.
+   ========================================================================= */
+[data-draggable] {
+  --drag-x: 0px;
+  --drag-y: 0px;
+  touch-action: none;
+  cursor: grab;
+  transform: translate(var(--drag-x), var(--drag-y)) rotate(var(--base-rotate, 0deg));
+  transition: transform 160ms var(--ease-spring), box-shadow 160ms ease;
+}
+[data-draggable].is-dragging {
+  cursor: grabbing;
+  transform: translate(var(--drag-x), var(--drag-y)) rotate(var(--base-rotate, 0deg)) scale(1.04);
+  box-shadow: var(--shadow-paper-lift);
+  transition: box-shadow 160ms ease;
+  z-index: 50;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-draggable] { transition: none; }
+}
+
+/* =========================================================================
+   SPREAD 01 — CONTENTS
+   ========================================================================= */
+.spread--contents.is-active { display: block; }
+.spread--contents .contents-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.contents-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2.5rem;
+}
+
+.contents-strip {
+  flex: 1 1 420px;
+  padding: 1.8rem 2rem;
+  transform: rotate(-1.1deg);
+}
+.contents-list { list-style: none; margin: 0; padding: 0; }
+.contents-row + .contents-row { margin-top: 1rem; }
+.contents-link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6em;
+  text-decoration: none;
+  color: inherit;
+}
+.contents-title {
+  font-family: var(--f-didone);
+  text-transform: uppercase;
+  font-size: clamp(1rem, 2.3vw, 1.3rem);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+.leader {
+  flex: 1 1 auto;
+  min-width: 16px;
+  border-bottom: 1px solid var(--ink-soft);
+  transform: translateY(-0.35em);
+}
+.contents-num {
+  font-family: var(--f-heavy);
+  font-size: clamp(1.25rem, 3vw, 1.8rem);
+  line-height: 1;
+  display: inline-block;
+  padding: 0.06em 0.26em;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(var(--base-rotate, 0deg));
+  transition: transform 160ms ease;
+}
+.contents-row:nth-child(6n+1) .contents-num { background: var(--ink); color: var(--paper-2); }
+.contents-row:nth-child(6n+2) .contents-num { background: var(--red); color: var(--paper-2); }
+.contents-row:nth-child(6n+3) .contents-num { background: var(--cyan); color: var(--ink); }
+.contents-row:nth-child(6n+4) .contents-num { background: var(--hot); color: var(--paper-2); }
+.contents-row:nth-child(6n+5) .contents-num { background: var(--acid); color: var(--ink); }
+.contents-row:nth-child(6n+0) .contents-num { background: var(--paper-2); color: var(--ink); border: 2px solid var(--ink); }
+
+.contents-link:hover .contents-num,
+.contents-link:focus-visible .contents-num {
+  transform: rotate(var(--base-rotate, 0deg)) scale(1.1);
+}
+
+.contents-previews {
+  flex: 0 1 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  padding-top: 0.6rem;
+}
+.thumb-scrap {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  padding: 0.9rem 1rem 0.7rem;
+  width: 150px;
+  text-align: center;
+}
+.thumb-scrap svg { width: 44px; height: 44px; margin: 0 auto 0.4rem; display: block; }
+.thumb-caption {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.margin-note {
+  display: flex;
+  align-items: center;
+  gap: 0.35em;
+  font-family: var(--f-marker);
+  font-size: clamp(1.05rem, 2.3vw, 1.35rem);
+  color: var(--red);
+  transform: rotate(-3deg);
+}
+.margin-note.contents-note { margin: 2.2rem 0 0 0.4rem; }
+.margin-note-arrow svg { width: 28px; height: 18px; display: block; }
+
+.masthead {
+  margin-top: 3rem;
+  max-width: 380px;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  line-height: 1.6;
+  transform: rotate(0.8deg);
+  padding: 1.1rem 1.3rem;
+}
+.masthead-name { font-weight: bold; letter-spacing: 0.14em; margin: 0 0 0.4em; }
+.masthead p:not(.masthead-name) { margin: 0.2em 0; }
+
+/* =========================================================================
+   Reusable magazine layout — two-column drop-cap copy + a scrap-filled
+   aside. Used by About Me, and reused by every later spread that runs
+   a body-copy-plus-showcases layout (Zeno, etc).
+   ========================================================================= */
+.magazine-layout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 2.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.magazine-copy {
+  flex: 1 1 460px;
+  column-count: 2;
+  column-gap: 2.2rem;
+}
+.magazine-copy p {
+  margin: 0 0 1em;
+  font-family: var(--f-body);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.magazine-copy .dropcap::first-letter {
+  font-family: var(--f-display);
+  font-size: 3.6rem;
+  line-height: 0.8;
+  float: left;
+  padding: 0.04em 0.08em 0 0;
+  color: var(--red);
+}
+
+.magazine-aside {
+  flex: 0 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  padding-top: 0.4rem;
+}
+
+.standfirst {
+  max-width: 1100px;
+  margin: 0.6rem auto 1.8rem;
+  font-family: var(--f-didone);
+  font-style: italic;
+  font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+  color: var(--ink);
+}
+
+/* =========================================================================
+   SPREAD 02 — ABOUT ME
+   ========================================================================= */
+
+.polaroid {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper-lift);
+  padding: 0.7rem 0.7rem 2.2rem;
+}
+.polaroid img { width: 100%; height: auto; display: block; filter: grayscale(0.15) contrast(1.05); }
+
+.flight-map { width: 100%; max-width: 300px; padding: 1rem 1.1rem 0.7rem; }
+.flight-map svg { width: 100%; height: auto; display: block; }
+.flight-label { font-family: var(--f-mono); font-size: 9px; letter-spacing: 0.02em; fill: var(--ink); text-transform: uppercase; }
+.flight-plane { cursor: grab; transition: transform 150ms ease; touch-action: none; }
+.flight-plane:active { cursor: grabbing; }
+@media (prefers-reduced-motion: reduce) {
+  .flight-plane { transition: none; }
+}
+.flight-note { margin: 0.7rem 0 0; justify-content: center; }
+
+/* =========================================================================
+   SPREAD 03 — WHAT I DO ALL DAY
+   ========================================================================= */
+.callout-field {
+  position: relative;
+  min-height: 62vh;
+  max-width: 1100px;
+  margin: 1rem auto 0;
+}
+.callout {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  max-width: 210px;
+}
+.callout-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.callout:nth-child(6n+1) .callout-dot { background: var(--ink); }
+.callout:nth-child(6n+2) .callout-dot { background: var(--red); }
+.callout:nth-child(6n+3) .callout-dot { background: var(--cyan); }
+.callout:nth-child(6n+4) .callout-dot { background: var(--hot); }
+.callout:nth-child(6n+5) .callout-dot { background: var(--acid); }
+.callout:nth-child(6n+0) .callout-dot { background: var(--paper-2); border: 2px solid var(--ink); }
+
+.callout-leader {
+  flex: 0 0 30px;
+  height: 1px;
+  background: var(--ink-soft);
+}
+.callout-caption {
+  font-family: var(--f-mono);
+  font-size: 0.76rem;
+  line-height: 1.35;
+  background: var(--paper-2);
+  padding: 0.5em 0.7em;
+  box-shadow: var(--shadow-paper);
+}
+.callout-note {
+  position: absolute;
+  bottom: 1%;
+  right: 2%;
+}
+
+/* =========================================================================
+   Oversized cut-out header — Zeno is the cover story, biggest headline
+   in the issue besides the cover name itself.
+   ========================================================================= */
+.cutout-header--xl .ch {
+  font-size: clamp(2.4rem, 8vw, 4.6rem);
+  padding: 0.05em 0.2em;
+}
+.cutout-header--sm .ch {
+  font-size: clamp(1rem, 3vw, 1.5rem);
+  padding: 0.04em 0.14em;
+}
+
+/* =========================================================================
+   Showcase frames — taped, rotated, dashed placeholder boxes standing in
+   for real screenshots. Real images drop in later; the commented slot
+   above each .showcase-placeholder names the file that will replace it.
+   ========================================================================= */
+.showcase-frame {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  padding: 0.8rem 0.8rem 0.6rem;
+  width: 100%;
+  max-width: 280px;
+}
+.showcase-placeholder {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border: 2px dashed var(--ink-soft);
+  background: var(--paper);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.showcase-placeholder-label {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  text-align: center;
+  padding: 0 0.6em;
+}
+.showcase-caption {
+  font-family: var(--f-mono);
+  font-size: 0.76rem;
+  margin: 0.6rem 0 0;
+  text-align: center;
+}
+
+/* =========================================================================
+   SPREAD 04 — THE ZENO FILES
+   ========================================================================= */
+.spread--zeno .section-header { margin-bottom: 0.6rem; }
+
+/* =========================================================================
+   SPREAD 05 — HOW I USE AI
+   ========================================================================= */
+.tool-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.6rem;
+  max-width: 1100px;
+  margin: 1.6rem auto;
+}
+.tool-badge {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  padding: 1rem 1.1rem 0.8rem;
+  width: 150px;
+  text-align: center;
+}
+.tool-name {
+  display: block;
+  font-family: var(--f-heavy);
+  font-size: 1.05rem;
+  margin-bottom: 0.5rem;
+}
+.tool-badge:nth-child(4n+1) .tool-name { color: var(--red); }
+.tool-badge:nth-child(4n+2) .tool-name { color: var(--cyan); }
+.tool-badge:nth-child(4n+3) .tool-name { color: var(--hot); }
+.tool-badge:nth-child(4n+0) .tool-name { color: var(--ink); }
+.tool-caption {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  line-height: 1.35;
+}
+
+.built-field {
+  position: relative;
+  min-height: 46vh;
+  max-width: 1100px;
+  margin: 1rem auto 0;
+}
+.built-item {
+  position: absolute;
+  max-width: 220px;
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.mezzer-showcase {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  text-align: center;
+}
+.mezzer-pair {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.8rem;
+}
+.mezzer-frame { position: relative; }
+.mezzer-label {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  background: var(--acid);
+  color: var(--ink);
+  font-family: var(--f-marker);
+  font-size: 1.2rem;
+  padding: 0 0.5em;
+  box-shadow: var(--shadow-paper);
+  z-index: 5;
+}
+
+/* =========================================================================
+   SPREAD 06 — BEFORE THIS
+   ========================================================================= */
+.role-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  max-width: 1100px;
+  margin: 2rem auto 0;
+}
+.role-card {
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  padding: 1.2rem 1.4rem;
+  max-width: 320px;
+  flex: 1 1 280px;
+}
+.role-card-title {
+  font-family: var(--f-heavy);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  margin: 0 0 0.6rem;
+}
+.role-card-body {
+  font-family: var(--f-body);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.due-stamp {
+  max-width: 340px;
+  margin: 2.5rem auto 0;
+  padding: 0.9rem 1.2rem;
+  border: 3px double var(--ink);
+  text-align: center;
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: var(--paper-2);
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-1.5deg);
+}
+
+/* =========================================================================
+   SPREAD 07 — OFF THE CLOCK — the busiest spread: most overlap, most
+   draggable elements.
+   ========================================================================= */
+.showcase-placeholder--square { aspect-ratio: 1 / 1; }
+
+.offclock-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 1.5rem auto 0;
+}
+
+/* --- Right Now sidebar --- */
+.rightnow-card {
+  max-width: 340px;
+  padding: 1.2rem 1.4rem 1.4rem;
+}
+.rightnow-card .cutout-header { margin-bottom: 0.9rem; }
+.rightnow-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.rightnow-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.rightnow-text {
+  font-family: var(--f-body);
+  font-size: 0.92rem;
+  margin: 0;
+}
+.rightnow-label {
+  display: block;
+  font-family: var(--f-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.rightnow-slot {
+  width: 58px;
+  flex-shrink: 0;
+}
+.rightnow-slot .showcase-placeholder-label { font-size: 0.5rem; padding: 0 0.2em; }
+
+/* --- Now-playing music swiper --- */
+.player-card {
+  max-width: 340px;
+  padding: 1rem 1.1rem 1.2rem;
+}
+.player-label {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--ink-soft);
+  margin: 0 0 0.8rem;
+}
+.player-body {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  justify-content: center;
+}
+.player-arrow {
+  background: var(--paper-2);
+  border: none;
+  box-shadow: var(--shadow-paper);
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  font-family: var(--f-heavy);
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+.player-viewport {
+  overflow: hidden;
+  width: 240px;
+  touch-action: pan-y;
+}
+.player-track {
+  display: flex;
+  gap: 16px;
+}
+.album-frame { width: 200px; flex-shrink: 0; }
+.album-caption {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  line-height: 1.3;
+  margin: 0.5rem 0 0;
+  text-align: center;
+}
+.player-dots {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+.player-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 0;
+  cursor: pointer;
+}
+.player-dot.is-active { background: var(--ink); }
+.player-note { justify-content: center; margin-top: 0.9rem; }
+
+/* --- Self-quiz --- */
+.quiz-block {
+  max-width: 700px;
+  margin: 2.5rem auto 0;
+}
+.quiz-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  justify-content: center;
+}
+.quiz-item {
+  max-width: 260px;
+  padding: 1rem 1.2rem;
+}
+.quiz-q {
+  font-family: var(--f-heavy);
+  font-size: 0.82rem;
+  margin: 0 0 0.5rem;
+}
+.quiz-a {
+  font-family: var(--f-marker);
+  font-size: 1.15rem;
+  color: var(--red);
+  margin: 0;
+}
+
+/* --- Sticker pile --- */
+.sticker-pile-wrap {
+  max-width: 1100px;
+  margin: 2.5rem auto 0;
+}
+.sticker-pile {
+  position: relative;
+  min-height: 42vh;
+}
+.sticker {
+  position: absolute;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-paper);
+  cursor: grab;
+}
+.sticker.is-dragging { cursor: grabbing; }
+.sticker svg { width: 32px; height: 32px; }
+.sticker-note { justify-content: center; margin: 1.5rem 0 0; }
+
+/* =========================================================================
+   Placeholder spreads (08) — built out in the next pass
+   ========================================================================= */
+.spread--stub.is-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.stub-card {
+  max-width: 480px;
+  padding: 2rem 2.2rem;
+  transform: rotate(-1.5deg);
+}
+.stub-title {
+  font-family: var(--f-heavy);
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+}
+.stub-card p { margin: 0 0 1.2rem; }
+.stub-back {
+  font-family: var(--f-mono);
+  text-decoration: none;
+  color: var(--ink);
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.1em;
+}
+
+/* =========================================================================
+   404 — torn out of the magazine
+   ========================================================================= */
+.notfound-page {
+  position: relative;
+  min-height: 100vh;
+  padding: 5rem 1.5rem 4rem;
+}
+.notfound-page::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 46px;
+  background: var(--paper);
+  box-shadow: 0 6px 0 rgba(25, 21, 18, 0.15);
+  clip-path: polygon(
+    0 0, 100% 0, 100% 40%, 94% 60%, 100% 75%, 88% 100%, 78% 70%,
+    68% 100%, 58% 65%, 48% 100%, 38% 68%, 28% 100%, 18% 65%, 8% 100%, 0 60%
+  );
+}
+.notfound-content {
+  max-width: 640px;
+  margin: 6rem auto 0;
+  text-align: center;
+}
+.notfound-headline .cutout-header { justify-content: center; }
+.notfound-line {
+  font-family: var(--f-body);
+  font-size: 1.15rem;
+  margin: 1.6rem 0 2.6rem;
+}
+.back-scrap {
+  display: inline-block;
+  font-family: var(--f-mono);
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--paper-2);
+  padding: 0.85em 1.5em;
+  box-shadow: var(--shadow-paper);
+  transform: rotate(-2deg);
+  letter-spacing: 0.04em;
+}
+
+/* =========================================================================
+   Responsive — down to 360px
+   ========================================================================= */
+@media (max-width: 480px) {
+  .spread { padding: 4.5rem 0.9rem 4.5rem; }
+  .flag { max-width: 130px; font-size: 0.78rem; padding: 0.45em 0.6em; }
+  .corner-stamp { position: static; margin-top: 2rem; text-align: center; }
+  .barcode { margin-left: auto; margin-right: auto; }
+  .flip-hint { position: static; margin-top: 1rem; }
+  .flip-hint-inner { justify-content: center; }
+  .cover-flags { position: static; display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: center; margin-bottom: 1.5rem; }
+  .flag { position: static; }
+
+  .contents-layout { flex-direction: column; }
+  .contents-previews { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+  .contents-title { white-space: normal; }
+  .stub-card { margin: 0 0.5rem; }
+
+  .page-turn { width: 44px; height: 44px; bottom: 34px; font-size: 1.1rem; }
+
+  .magazine-copy { column-count: 1; }
+  .magazine-aside { flex: 1 1 100%; }
+  .callout-field { min-height: 78vh; }
+  .callout { max-width: 170px; }
+
+  .built-field { min-height: 62vh; }
+  .built-item { max-width: 180px; }
+  .mezzer-pair { gap: 2.4rem; }
+
+  .player-viewport { width: 200px; }
+  .album-frame { width: 160px; }
+  .sticker-pile { min-height: 56vh; }
+}

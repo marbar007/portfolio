@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Page not found — Marcela Figueroa Delgado</title>
+<meta name="robots" content="noindex" />
+<link rel="icon" href="favicon.ico" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Playfair+Display:ital,wght@0,700;1,700&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="paper-grain" aria-hidden="true"></div>
+
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+  <span class="lang-toggle-label">EDICIÓN:</span>
+  <button type="button" id="lang-en" class="lang-btn is-active" aria-pressed="true">EN</button>
+  <span class="lang-slash">/</span>
+  <button type="button" id="lang-es" class="lang-btn" aria-pressed="false">ES</button>
+</div>
+
+<main class="notfound-page">
+  <div class="notfound-content">
+    <h1 class="section-header notfound-headline">
+      <span class="sr-only" data-en="This page got ripped out" data-es="Esta página se arrancó">This page got ripped out</span>
+      <span class="cutout-header" aria-hidden="true" data-en="THIS PAGE GOT RIPPED OUT" data-es="ESTA PÁGINA SE ARRANCÓ"></span>
+    </h1>
+
+    <p class="notfound-line" data-en="Nothing here. Head back to the cover." data-es="Aquí no hay nada. Vuelve a la portada.">Nothing here. Head back to the cover.</p>
+
+    <a class="back-scrap tape" href="/" data-en="Back to the cover" data-es="Volver a la portada">Back to the cover</a>
+  </div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var TITLES = {
+    en: "Page not found — Marcela Figueroa Delgado",
+    es: "Página no encontrada — Marcela Figueroa Delgado"
+  };
+
+  function renderHeaders(lang) {
+    document.querySelectorAll(".cutout-header").forEach(function (el) {
+      var text = el.getAttribute("data-" + lang) || "";
+      el.textContent = "";
+      for (var i = 0; i < text.length; i++) {
+        var ch = text[i];
+        var span = document.createElement("span");
+        if (ch === " ") { span.className = "ch ch--space"; span.textContent = " "; }
+        else { span.className = "ch"; span.textContent = ch; }
+        el.appendChild(span);
+      }
+    });
+  }
+
+  function setLanguage(lang) {
+    document.querySelectorAll("[data-en][data-es]:not(.cutout-header)").forEach(function (el) {
+      el.textContent = el.getAttribute("data-" + lang);
+    });
+    renderHeaders(lang);
+    document.documentElement.lang = lang;
+    document.title = TITLES[lang];
+    document.getElementById("lang-en").classList.toggle("is-active", lang === "en");
+    document.getElementById("lang-es").classList.toggle("is-active", lang === "es");
+    document.getElementById("lang-en").setAttribute("aria-pressed", String(lang === "en"));
+    document.getElementById("lang-es").setAttribute("aria-pressed", String(lang === "es"));
+  }
+
+  document.getElementById("lang-en").addEventListener("click", function () { setLanguage("en"); });
+  document.getElementById("lang-es").addEventListener("click", function () { setLanguage("es"); });
+
+  renderHeaders("en");
+})();
+</script>
+</body>
+</html>

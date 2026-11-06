@@ -1,0 +1,693 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marcela Figueroa Delgado — Portfolio</title>
+<meta name="description" content="Portfolio of Marcela Figueroa Delgado. Talent and operations, built like a magazine." />
+<link rel="icon" href="favicon.ico" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Marcela Figueroa Delgado — Portfolio" />
+<meta property="og:description" content="Portfolio of Marcela Figueroa Delgado. Talent and operations, built like a magazine." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="" /> <!-- TODO: set to the deployed URL once this is imported into Vercel -->
+<!-- assets/og-cover.png is a 1200x630 screenshot of the finished cover spread.
+     Regenerate it any time the cover design changes — it is not built automatically. -->
+<meta property="og:image" content="assets/og-cover.png" />
+<meta property="og:locale" content="en_US" />
+<meta property="og:locale:alternate" content="es_PE" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Marcela Figueroa Delgado — Portfolio" />
+<meta name="twitter:description" content="Portfolio of Marcela Figueroa Delgado. Talent and operations, built like a magazine." />
+<meta name="twitter:image" content="assets/og-cover.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Playfair+Display:ital,wght@0,700;1,700&family=Courier+Prime:wght@400;700&family=Caveat:wght@500;700&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="paper-grain" aria-hidden="true"></div>
+
+<div class="lang-toggle" role="group" aria-label="Language / Idioma">
+  <span class="lang-toggle-label">EDICIÓN:</span>
+  <button type="button" id="lang-en" class="lang-btn is-active" aria-pressed="true">EN</button>
+  <span class="lang-slash">/</span>
+  <button type="button" id="lang-es" class="lang-btn" aria-pressed="false">ES</button>
+</div>
+
+<main id="app">
+
+  <!-- ===================================================================
+       SPREAD 00 — COVER
+       =================================================================== -->
+  <section class="spread spread--cover" id="spread-00" aria-labelledby="cover-name"
+    data-hash="#/" data-page="00" data-section-en="Cover" data-section-es="Portada">
+
+    <div class="cover-flags" aria-hidden="false">
+      <p class="flag flag--1" data-en="Talent &amp; Ops Lead at Zeno Worlds" data-es="Talent &amp; Ops Lead en Zeno Worlds">Talent &amp; Ops Lead at Zeno Worlds</p>
+      <p class="flag flag--2" data-en="From urgent care to roofing crews" data-es="De la clínica a las cuadrillas de techos">From urgent care to roofing crews</p>
+      <p class="flag flag--3" data-en="She built the CRM. And the website." data-es="Ella construyó el CRM. Y la web.">She built the CRM. And the website.</p>
+      <p class="flag flag--4" data-en="The AI tools she actually uses" data-es="Las herramientas de IA que sí usa">The AI tools she actually uses</p>
+      <p class="flag flag--5" data-en="Bilingual, all day, every day" data-es="Bilingüe, todo el día, todos los días">Bilingual, all day, every day</p>
+    </div>
+
+    <div class="name-block">
+      <h1 class="sr-only" id="cover-name">Marcela Figueroa Delgado</h1>
+
+      <div class="cutout-name" aria-hidden="true">
+        <span class="cl cl--m">M</span>
+        <span class="cl cl--a1">A</span>
+        <span class="cl cl--r">R</span>
+        <span class="cl cl--c">C</span>
+        <span class="cl cl--e">E</span>
+        <span class="cl cl--l">L</span>
+        <span class="cl cl--a2">A</span>
+      </div>
+
+      <p class="surname" aria-hidden="true">Figueroa Delgado</p>
+
+      <p class="tagline" data-en="Two passports, one inbox" data-es="Dos pasaportes, un inbox">Two passports, one inbox</p>
+    </div>
+
+    <div class="corner-stamp">
+      <p class="issue-info">
+        No. 01 &middot;
+        <span data-en="LIMA, PERÚ" data-es="LIMA, PERÚ">LIMA, PERÚ</span> &middot;
+        <span class="year">2026</span>
+      </p>
+    </div>
+
+    <a href="#/contents" class="flip-hint">
+      <span class="flip-hint-inner">
+        <svg viewBox="0 0 46 32" aria-hidden="true" focusable="false">
+          <path d="M3 12 C 15 4, 30 6, 40 17" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M40 17 L 29 15 M40 17 L 35 6" stroke="var(--ink)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        </svg>
+        <span data-en="flip me" data-es="dale la vuelta">flip me</span>
+      </span>
+    </a>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 01 — CONTENTS
+       =================================================================== -->
+  <section class="spread spread--contents" id="spread-01" aria-labelledby="contents-heading"
+    data-hash="#/contents" data-page="01" data-section-en="Contents" data-section-es="Índice">
+
+    <div class="contents-wrap">
+      <h2 id="contents-heading" class="section-header">
+        <span class="sr-only" data-en="What's Inside" data-es="Qué hay adentro">What's Inside</span>
+        <span class="cutout-header" aria-hidden="true" data-en="WHAT'S INSIDE" data-es="QUÉ HAY ADENTRO"></span>
+      </h2>
+
+      <div class="contents-layout">
+        <div class="contents-strip card torn-1 tape">
+          <ol class="contents-list">
+            <li class="contents-row">
+              <a class="contents-link" href="#/about">
+                <span class="contents-title" data-en="About Me" data-es="Sobre Mí">About Me</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:-3deg">02</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/what-i-do">
+                <span class="contents-title" data-en="What I Do All Day" data-es="Lo Que Hago Todo El Día">What I Do All Day</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:2deg">03</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/zeno">
+                <span class="contents-title" data-en="The Zeno Files" data-es="Los Archivos Zeno">The Zeno Files</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:-2deg">04</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/ai">
+                <span class="contents-title" data-en="How I Use AI" data-es="Cómo Uso La IA">How I Use AI</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:3deg">05</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/before-this">
+                <span class="contents-title" data-en="Before This" data-es="Antes De Esto">Before This</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:-3deg">06</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/off-the-clock">
+                <span class="contents-title" data-en="Off The Clock" data-es="Tiempo Libre">Off The Clock</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:2deg">07</span>
+              </a>
+            </li>
+            <li class="contents-row">
+              <a class="contents-link" href="#/contact">
+                <span class="contents-title" data-en="Let's Talk" data-es="Hablemos">Let's Talk</span>
+                <span class="sr-only">—</span>
+                <span class="leader" aria-hidden="true"></span>
+                <span class="contents-num" style="--base-rotate:-2deg">08</span>
+              </a>
+            </li>
+          </ol>
+        </div>
+
+        <div class="contents-previews">
+          <div class="thumb-scrap tape" data-draggable tabindex="0"
+            style="--base-rotate:-6deg" aria-label="Decorative torn-paper preview thumbnail, draggable">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <circle cx="24" cy="17" r="8" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+              <path d="M8 42c1-9 8-15 16-15s15 6 16 15" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+            <span class="thumb-caption" data-en="About" data-es="Sobre mí">About</span>
+          </div>
+          <div class="thumb-scrap tape" data-draggable tabindex="0"
+            style="--base-rotate:4deg" aria-label="Decorative torn-paper preview thumbnail, draggable">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <rect x="7" y="18" width="34" height="20" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+              <path d="M18 18v-4a6 6 0 0 1 12 0v4" fill="none" stroke="var(--ink)" stroke-width="2.5"/>
+            </svg>
+            <span class="thumb-caption" data-en="Zeno" data-es="Zeno">Zeno</span>
+          </div>
+          <div class="thumb-scrap tape" data-draggable tabindex="0"
+            style="--base-rotate:-3deg" aria-label="Decorative torn-paper preview thumbnail, draggable">
+            <svg viewBox="0 0 48 48" aria-hidden="true" focusable="false">
+              <path d="M24 6 L28 20 L42 24 L28 28 L24 42 L20 28 L6 24 L20 20 Z" fill="none" stroke="var(--ink)" stroke-width="2.5" stroke-linejoin="round"/>
+            </svg>
+            <span class="thumb-caption" data-en="AI" data-es="IA">AI</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="margin-note contents-note" data-en="click any number to skip ahead" data-es="haz clic en cualquier número para saltar">click any number to skip ahead</p>
+
+      <div class="masthead card">
+        <p class="masthead-name">MFD MAGAZINE</p>
+        <p data-en="Written, designed, and built by Marcela Figueroa Delgado." data-es="Escrito, diseñado y construido por Marcela Figueroa Delgado.">Written, designed, and built by Marcela Figueroa Delgado.</p>
+        <p data-en="Lima, Perú. Issue One." data-es="Lima, Perú. Edición uno.">Lima, Perú. Issue One.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 02 — ABOUT ME
+       =================================================================== -->
+  <section class="spread spread--about" id="spread-02" aria-labelledby="about-heading"
+    data-hash="#/about" data-page="02" data-section-en="About Me" data-section-es="Sobre Mí">
+
+    <h2 id="about-heading" class="section-header">
+      <span class="sr-only" data-en="Who Is She" data-es="Quién Es Ella">Who Is She</span>
+      <span class="cutout-header" aria-hidden="true" data-en="WHO IS SHE" data-es="QUIÉN ES ELLA"></span>
+    </h2>
+
+    <div class="magazine-layout">
+      <div class="magazine-copy">
+        <p class="dropcap" data-en="Hi, I'm Marcela. American and Peruvian, and right now I'm running the Peruvian half." data-es="Hola, soy Marcela. Estadounidense y peruana, y por ahora estoy del lado peruano.">Hi, I'm Marcela. American and Peruvian, and right now I'm running the Peruvian half.</p>
+        <p data-en="I grew up in the US, went to school there, and started working there. Urgent care front desk, then a Wawa register. In 2025 I moved to Lima. Now I work US hours for US companies from here, which turns out to be the most natural thing in the world when you already belong in both places." data-es="Crecí en Estados Unidos, estudié allá y empecé a trabajar allá. Recepción en una clínica de urgencias, después caja en Wawa. En 2025 me mudé a Lima. Ahora trabajo en horario de Estados Unidos para empresas de allá desde acá, que resulta ser lo más natural del mundo cuando ya perteneces a los dos lados.">I grew up in the US, went to school there, and started working there. Urgent care front desk, then a Wawa register. In 2025 I moved to Lima. Now I work US hours for US companies from here, which turns out to be the most natural thing in the world when you already belong in both places.</p>
+        <p data-en="The industry changes every time. Urgent care, then roofing crews, now talent and operations for a company that places executive assistants. The job underneath never changes. Hold every detail, follow every thread, write it down so the next person picks it up without asking." data-es="El rubro cambia cada vez. Urgencias, después cuadrillas de techos, ahora talento y operaciones para una empresa que coloca asistentes ejecutivas. El trabajo por debajo nunca cambia. Sostener cada detalle, seguir cada hilo, dejarlo escrito para que la siguiente persona lo agarre sin preguntar.">The industry changes every time. Urgent care, then roofing crews, now talent and operations for a company that places executive assistants. The job underneath never changes. Hold every detail, follow every thread, write it down so the next person picks it up without asking.</p>
+        <p data-en="I build things too. CRMs, screening tools, SOP databases, websites, this one included. Mostly self taught, mostly with AI, mostly because I needed the thing to exist." data-es="También construyo cosas. CRMs, herramientas de filtro, bases de datos de procedimientos, páginas web, incluida esta. Casi todo autodidacta, casi todo con IA, casi todo porque necesitaba que la cosa existiera.">I build things too. CRMs, screening tools, SOP databases, websites, this one included. Mostly self taught, mostly with AI, mostly because I needed the thing to exist.</p>
+      </div>
+
+      <div class="magazine-aside">
+        <!-- optional portrait: assets/marcela.jpg
+        <div class="polaroid tape" data-draggable tabindex="0" style="--base-rotate:-4deg">
+          <img src="assets/marcela.jpg" alt="Marcela Figueroa Delgado" loading="lazy" />
+        </div>
+        -->
+
+        <div class="flight-map card tape" style="transform: rotate(-2deg)">
+          <svg id="flight-map-svg" viewBox="0 0 320 170" focusable="false">
+            <title data-en="Flight path map from Northern Virginia to Lima, Perú" data-es="Mapa de la ruta de vuelo entre el norte de Virginia y Lima, Perú">Flight path map from Northern Virginia to Lima, Perú</title>
+            <path id="flight-path" d="M34,130 Q160,20 286,118" fill="none" stroke="var(--ink)" stroke-width="2" stroke-dasharray="1 7" stroke-linecap="round"/>
+            <circle cx="34" cy="130" r="4.5" fill="var(--ink)"/>
+            <circle cx="286" cy="118" r="4.5" fill="var(--ink)"/>
+            <text x="10" y="148" class="flight-label">NORTHERN VIRGINIA</text>
+            <text x="308" y="136" class="flight-label" text-anchor="end">LIMA, PERÚ</text>
+            <g id="plane" class="flight-plane" tabindex="0" role="slider"
+              aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"
+              aria-label="Drag along the flight path" data-en="Drag along the flight path" data-es="Arrastra a lo largo de la ruta">
+              <path d="M -9 -3 L 9 0 L -9 3 L -4 0 Z" fill="var(--ink)"/>
+            </g>
+          </svg>
+          <p class="margin-note flight-note" data-en="2,500 miles, same workday" data-es="4.000 kilómetros, misma jornada">2,500 miles, same workday</p>
+        </div>
+
+        <p class="margin-note" style="transform: rotate(-4deg)">
+          <span class="margin-note-arrow" aria-hidden="true">
+            <svg viewBox="0 0 30 20" focusable="false"><path d="M2 4 C 10 2, 18 10, 27 14" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M27 14 L20 12 M27 14 L23 6" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <span data-en="dual national, not a digital nomad" data-es="doble nacionalidad, no nómada digital">dual national, not a digital nomad</span>
+        </p>
+
+        <p class="margin-note" style="transform: rotate(3deg)">
+          <span class="margin-note-arrow" aria-hidden="true">
+            <svg viewBox="0 0 30 20" focusable="false"><path d="M2 4 C 10 2, 18 10, 27 14" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M27 14 L20 12 M27 14 L23 6" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <span data-en="both languages, all day" data-es="los dos idiomas, todo el día">both languages, all day</span>
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 03 — WHAT I DO ALL DAY
+       =================================================================== -->
+  <section class="spread spread--whatido" id="spread-03" aria-labelledby="whatido-heading"
+    data-hash="#/what-i-do" data-page="03" data-section-en="What I Do All Day" data-section-es="Lo Que Hago Todo El Día">
+
+    <h2 id="whatido-heading" class="section-header">
+      <span class="sr-only" data-en="What I Actually Do All Day" data-es="Lo Que Hago Todo El Día">What I Actually Do All Day</span>
+      <span class="cutout-header" aria-hidden="true" data-en="WHAT I ACTUALLY DO ALL DAY" data-es="LO QUE HAGO TODO EL DÍA"></span>
+    </h2>
+
+    <div class="callout-field">
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:-4deg; top:4%; left:5%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Recruiting and candidate pipelines" data-es="Reclutamiento y pipelines de candidatos">Recruiting and candidate pipelines</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:3deg; top:1%; left:40%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="First-round interviews" data-es="Entrevistas de primera ronda">First-round interviews</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:-3deg; top:9%; left:74%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Candidate overviews for leadership" data-es="Resúmenes de candidatos para dirección">Candidate overviews for leadership</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:5deg; top:26%; left:14%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="CRM management and status tracking" data-es="Gestión del CRM y seguimiento de estados">CRM management and status tracking</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:-5deg; top:30%; left:48%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="SOPs and process documentation" data-es="Procedimientos y documentación de procesos">SOPs and process documentation</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:2deg; top:22%; left:80%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Onboarding logistics" data-es="Logística de incorporación">Onboarding logistics</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:-2deg; top:52%; left:22%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Client follow-up and discovery calls" data-es="Seguimiento a clientes y llamadas de descubrimiento">Client follow-up and discovery calls</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:4deg; top:56%; left:56%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Executive support and calendars" data-es="Soporte ejecutivo y agendas">Executive support and calendars</span>
+      </div>
+      <div class="callout" data-draggable tabindex="0" style="--base-rotate:-4deg; top:46%; left:82%;">
+        <span class="callout-dot" aria-hidden="true"></span>
+        <span class="callout-leader" aria-hidden="true"></span>
+        <span class="callout-caption" data-en="Insurance claims coordination" data-es="Coordinación de reclamos de seguros">Insurance claims coordination</span>
+      </div>
+
+      <p class="margin-note callout-note" style="transform: rotate(-3deg)" data-en="nine things, two languages, one me" data-es="nueve cosas, dos idiomas, una sola yo">nine things, two languages, one me</p>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 04 — THE ZENO FILES
+       =================================================================== -->
+  <section class="spread spread--zeno" id="spread-04" aria-labelledby="zeno-heading"
+    data-hash="#/zeno" data-page="04" data-section-en="The Zeno Files" data-section-es="Los Archivos Zeno">
+
+    <h2 id="zeno-heading" class="section-header">
+      <span class="sr-only" data-en="The Zeno Files" data-es="Los Archivos Zeno">The Zeno Files</span>
+      <span class="cutout-header cutout-header--xl" aria-hidden="true" data-en="THE ZENO FILES" data-es="LOS ARCHIVOS ZENO"></span>
+    </h2>
+
+    <p class="standfirst" data-en="Talent and Operations Lead. May 2026 to now." data-es="Talent and Operations Lead. Desde mayo de 2026.">Talent and Operations Lead. May 2026 to now.</p>
+
+    <div class="magazine-layout">
+      <div class="magazine-copy">
+        <p class="dropcap" data-en="Zeno Worlds places AI-fluent executive assistants from Latin America with US business owners. I own the talent side end to end." data-es="Zeno Worlds coloca asistentes ejecutivas de Latinoamérica, con manejo de IA, con dueños de negocios en Estados Unidos. Yo manejo toda la parte de talento.">Zeno Worlds places AI-fluent executive assistants from Latin America with US business owners. I own the talent side end to end.</p>
+        <p data-en="I build the candidate pipelines. I run first-round interviews and turn them into structured overviews, so leadership reads one clean page instead of six resumes. I keep the CRM accurate, profiles, statuses, documents, all of it. I write the SOPs for recruiting, onboarding, and internal operations, then keep them current when the process changes. I handle onboarding logistics for new hires. I follow up with clients and run discovery calls." data-es="Construyo los pipelines de candidatos. Hago las entrevistas de primera ronda y las convierto en resúmenes estructurados, para que dirección lea una sola página limpia en vez de seis currículums. Mantengo el CRM al día, perfiles, estados, documentos, todo. Escribo los procedimientos de reclutamiento, incorporación y operaciones internas, y los mantengo al día cuando el proceso cambia. Manejo la logística de incorporación de nuevos ingresos. Hago seguimiento a clientes y llevo las llamadas de descubrimiento.">I build the candidate pipelines. I run first-round interviews and turn them into structured overviews, so leadership reads one clean page instead of six resumes. I keep the CRM accurate, profiles, statuses, documents, all of it. I write the SOPs for recruiting, onboarding, and internal operations, then keep them current when the process changes. I handle onboarding logistics for new hires. I follow up with clients and run discovery calls.</p>
+      </div>
+
+      <div class="magazine-aside">
+        <div class="showcase-frame tape" data-draggable tabindex="0" style="--base-rotate:-3deg">
+          <div class="showcase-placeholder" role="img" aria-label="Placeholder for a screenshot of the Zeno Worlds website" data-en="Placeholder for a screenshot of the Zeno Worlds website" data-es="Marcador de posición para una captura del sitio de Zeno Worlds">
+            <!-- assets/shots/zeno-site.webp -->
+            <!-- once this image exists, wrap this .showcase-frame in <a href="[live Zeno Worlds URL]" target="_blank" rel="noopener"> -->
+            <span class="showcase-placeholder-label" aria-hidden="true" data-en="image coming soon" data-es="imagen próximamente">image coming soon</span>
+          </div>
+          <p class="showcase-caption" data-en="The Zeno Worlds site" data-es="El sitio de Zeno Worlds">The Zeno Worlds site</p>
+        </div>
+
+        <div class="showcase-frame tape" data-draggable tabindex="0" style="--base-rotate:4deg">
+          <div class="showcase-placeholder" role="img" aria-label="Placeholder for a screenshot of the SOP database" data-en="Placeholder for a screenshot of the SOP database" data-es="Marcador de posición para una captura de la base de procedimientos">
+            <!-- assets/shots/sop-database.webp -->
+            <span class="showcase-placeholder-label" aria-hidden="true" data-en="image coming soon" data-es="imagen próximamente">image coming soon</span>
+          </div>
+          <p class="showcase-caption" data-en="The SOP database, all mine" data-es="La base de procedimientos, toda mía">The SOP database, all mine</p>
+        </div>
+
+        <p class="margin-note" style="transform: rotate(-4deg)">
+          <span class="margin-note-arrow" aria-hidden="true">
+            <svg viewBox="0 0 30 20" focusable="false"><path d="M2 4 C 10 2, 18 10, 27 14" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M27 14 L20 12 M27 14 L23 6" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          </span>
+          <span data-en="I wrote every one of these" data-es="Escribí cada uno de estos">I wrote every one of these</span>
+        </p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 05 — HOW I USE AI
+       =================================================================== -->
+  <section class="spread spread--ai" id="spread-05" aria-labelledby="ai-heading"
+    data-hash="#/ai" data-page="05" data-section-en="How I Use AI" data-section-es="Cómo Uso La IA">
+
+    <h2 id="ai-heading" class="section-header">
+      <span class="sr-only" data-en="How I Use AI" data-es="Cómo Uso La IA">How I Use AI</span>
+      <span class="cutout-header" aria-hidden="true" data-en="HOW I USE AI" data-es="CÓMO USO LA IA"></span>
+    </h2>
+
+    <p class="standfirst" data-en="Self taught. I learn by building the thing I need, then keeping it running." data-es="Autodidacta. Aprendo construyendo la cosa que necesito, y después manteniéndola.">Self taught. I learn by building the thing I need, then keeping it running.</p>
+
+    <div class="tool-row">
+      <div class="tool-badge tape" data-draggable tabindex="0" style="--base-rotate:-4deg">
+        <span class="tool-name">Claude</span>
+        <span class="tool-caption" data-en="daily driver. tools, docs, drafting" data-es="el de todos los días. herramientas, documentos, redacción">daily driver. tools, docs, drafting</span>
+      </div>
+      <div class="tool-badge tape" data-draggable tabindex="0" style="--base-rotate:3deg">
+        <span class="tool-name">ChatGPT</span>
+        <span class="tool-caption" data-en="second opinion, quick turnarounds" data-es="segunda opinión, respuestas rápidas">second opinion, quick turnarounds</span>
+      </div>
+      <div class="tool-badge tape" data-draggable tabindex="0" style="--base-rotate:-3deg">
+        <span class="tool-name">Lovable</span>
+        <span class="tool-caption" data-en="app and CRM builds" data-es="apps y CRMs">app and CRM builds</span>
+      </div>
+      <div class="tool-badge tape" data-draggable tabindex="0" style="--base-rotate:4deg">
+        <span class="tool-name">VS Code</span>
+        <span class="tool-caption" data-en="where the sites get built" data-es="donde se construyen los sitios">where the sites get built</span>
+      </div>
+    </div>
+
+    <div class="built-field">
+      <p class="built-item card torn-1" style="top:2%; left:5%; transform:rotate(-4deg)" data-en="A CRM for candidate profiles, statuses, and documents" data-es="Un CRM para perfiles, estados y documentos de candidatos">A CRM for candidate profiles, statuses, and documents</p>
+      <p class="built-item card torn-2" style="top:0%; left:40%; transform:rotate(3deg)" data-en="An applicant screening tool that scores and tiers a pool against a job description" data-es="Una herramienta que puntúa y clasifica postulantes según la descripción del puesto">An applicant screening tool that scores and tiers a pool against a job description</p>
+      <p class="built-item card torn-3" style="top:15%; left:72%; transform:rotate(-3deg)" data-en="A candidate overview generator that turns interview notes into one consistent page" data-es="Un generador de resúmenes que convierte notas de entrevista en una página consistente">A candidate overview generator that turns interview notes into one consistent page</p>
+      <p class="built-item card torn-2" style="top:36%; left:18%; transform:rotate(5deg)" data-en="A searchable SOP database" data-es="Una base de datos de procedimientos, con buscador">A searchable SOP database</p>
+      <p class="built-item card torn-1" style="top:40%; left:54%; transform:rotate(-5deg)" data-en="Websites, including this one" data-es="Páginas web, incluida esta">Websites, including this one</p>
+    </div>
+
+    <div class="mezzer-showcase">
+      <div class="mezzer-pair">
+        <div class="showcase-frame tape mezzer-frame" data-draggable tabindex="0" style="--base-rotate:-3deg">
+          <span class="mezzer-label" data-en="BEFORE" data-es="ANTES">BEFORE</span>
+          <div class="showcase-placeholder" role="img" aria-label="Placeholder for a before screenshot of the Mezzer Tech website" data-en="Placeholder for a before screenshot of the Mezzer Tech website" data-es="Marcador de posición para la captura de antes del sitio de Mezzer Tech">
+            <!-- assets/shots/mezzer-before.webp -->
+            <span class="showcase-placeholder-label" aria-hidden="true" data-en="image coming soon" data-es="imagen próximamente">image coming soon</span>
+          </div>
+        </div>
+        <div class="showcase-frame tape mezzer-frame" data-draggable tabindex="0" style="--base-rotate:3deg">
+          <span class="mezzer-label" data-en="AFTER" data-es="DESPUÉS">AFTER</span>
+          <div class="showcase-placeholder" role="img" aria-label="Placeholder for an after screenshot of the Mezzer Tech website" data-en="Placeholder for an after screenshot of the Mezzer Tech website" data-es="Marcador de posición para la captura de después del sitio de Mezzer Tech">
+            <!-- assets/shots/mezzer-after.webp -->
+            <!-- once this image exists, wrap this .showcase-frame in <a href="[live Mezzer Tech URL]" target="_blank" rel="noopener"> -->
+            <span class="showcase-placeholder-label" aria-hidden="true" data-en="image coming soon" data-es="imagen próximamente">image coming soon</span>
+          </div>
+        </div>
+      </div>
+      <p class="showcase-caption" data-en="Mezzer Tech, full redesign" data-es="Mezzer Tech, rediseño completo">Mezzer Tech, full redesign</p>
+    </div>
+
+    <p class="margin-note" style="transform: rotate(-3deg)">
+      <span class="margin-note-arrow" aria-hidden="true">
+        <svg viewBox="0 0 30 20" focusable="false"><path d="M2 4 C 10 2, 18 10, 27 14" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M27 14 L20 12 M27 14 L23 6" stroke="var(--ink)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </span>
+      <span data-en="this site is on the list too. view source." data-es="esta página también está en la lista. mira el código.">this site is on the list too. view source.</span>
+    </p>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 06 — BEFORE THIS
+       =================================================================== -->
+  <section class="spread spread--before" id="spread-06" aria-labelledby="before-heading"
+    data-hash="#/before-this" data-page="06" data-section-en="Before This" data-section-es="Antes De Esto">
+
+    <h2 id="before-heading" class="section-header">
+      <span class="sr-only" data-en="Before This" data-es="Antes De Esto">Before This</span>
+      <span class="cutout-header" aria-hidden="true" data-en="BEFORE THIS" data-es="ANTES DE ESTO"></span>
+    </h2>
+
+    <div class="role-cards">
+      <div class="role-card tape" data-draggable tabindex="0" style="--base-rotate:-3deg">
+        <p class="role-card-title" data-en="Executive Assistant, a residential and commercial roofing company in Virginia. December 2025 to now." data-es="Asistente Ejecutiva, empresa de techos residenciales y comerciales en Virginia. Desde diciembre de 2025.">Executive Assistant, a residential and commercial roofing company in Virginia. December 2025 to now.</p>
+        <p class="role-card-body" data-en="Calendar, scheduling, and crew coordination. Bilingual liaison between leadership and Spanish-speaking crews and subcontractors. Insurance claims from filing to adjuster follow-up. Recruiting, hours tracking, and on-site logistics." data-es="Agenda, programación y coordinación de cuadrillas. Enlace bilingüe entre dirección y cuadrillas y subcontratistas hispanohablantes. Reclamos de seguros desde la presentación hasta el seguimiento con ajustadores. Reclutamiento, control de horas y logística en obra.">Calendar, scheduling, and crew coordination. Bilingual liaison between leadership and Spanish-speaking crews and subcontractors. Insurance claims from filing to adjuster follow-up. Recruiting, hours tracking, and on-site logistics.</p>
+      </div>
+      <div class="role-card tape" data-draggable tabindex="0" style="--base-rotate:2deg">
+        <p class="role-card-title" data-en="Medical Receptionist, Gainesville Urgent Medical Care. June 2023 to July 2025." data-es="Recepcionista Médica, Gainesville Urgent Medical Care. Junio de 2023 a julio de 2025.">Medical Receptionist, Gainesville Urgent Medical Care. June 2023 to July 2025.</p>
+        <p class="role-card-body" data-en="Patient scheduling and front desk in a high-volume urgent care. Billing, insurance verification, claims processing, and EMR records. Patient-facing service in both languages. This is where I learned that claims are won on documentation." data-es="Programación de pacientes y recepción en una clínica de urgencias de alto volumen. Facturación, verificación de seguros, procesamiento de reclamos y registros médicos electrónicos. Atención a pacientes en los dos idiomas. Ahí aprendí que los reclamos se ganan con documentación.">Patient scheduling and front desk in a high-volume urgent care. Billing, insurance verification, claims processing, and EMR records. Patient-facing service in both languages. This is where I learned that claims are won on documentation.</p>
+      </div>
+      <div class="role-card tape" data-draggable tabindex="0" style="--base-rotate:-2deg">
+        <p class="role-card-title" data-en="Team Lead, Wawa. February 2025 to July 2025." data-es="Jefa de Turno, Wawa. Febrero a julio de 2025.">Team Lead, Wawa. February 2025 to July 2025.</p>
+        <p class="role-card-body" data-en="Ran daily store operations across the counter, the register, and food service. Directed the team through the shift, handled cash, and kept the open and close on schedule." data-es="Manejé la operación diaria del local, mostrador, caja y servicio de comida. Dirigí al equipo durante el turno, manejé efectivo y mantuve la apertura y el cierre a tiempo.">Ran daily store operations across the counter, the register, and food service. Directed the team through the shift, handled cash, and kept the open and close on schedule.</p>
+      </div>
+    </div>
+
+    <p class="due-stamp" data-en="Gainesville High School, Advanced Diploma, 2019 to 2023" data-es="Gainesville High School, Advanced Diploma, 2019 a 2023">Gainesville High School, Advanced Diploma, 2019 to 2023</p>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 07 — OFF THE CLOCK
+       =================================================================== -->
+  <section class="spread spread--offclock" id="spread-07" aria-labelledby="offclock-heading"
+    data-hash="#/off-the-clock" data-page="07" data-section-en="Off The Clock" data-section-es="Tiempo Libre">
+
+    <h2 id="offclock-heading" class="section-header">
+      <span class="sr-only" data-en="Off The Clock" data-es="Tiempo Libre">Off The Clock</span>
+      <span class="cutout-header" aria-hidden="true" data-en="OFF THE CLOCK" data-es="TIEMPO LIBRE"></span>
+    </h2>
+
+    <p class="standfirst" data-en="The rest of it. Because a resume leaves out everything that makes a person tolerable to work with." data-es="Lo demás. Porque un currículum deja fuera todo lo que hace que una persona sea soportable en el trabajo.">The rest of it. Because a resume leaves out everything that makes a person tolerable to work with.</p>
+
+    <div class="offclock-layout">
+
+      <!-- Block 1: Right Now sidebar -->
+      <div class="rightnow-card card tape" style="transform: rotate(-2deg)">
+        <h3 class="section-header">
+          <span class="sr-only" data-en="Right Now" data-es="Ahora Mismo">Right Now</span>
+          <span class="cutout-header cutout-header--sm" aria-hidden="true" data-en="RIGHT NOW" data-es="AHORA MISMO"></span>
+        </h3>
+
+        <div class="rightnow-rows">
+          <div class="rightnow-row">
+            <p class="rightnow-text"><span class="rightnow-label" data-en="Learning" data-es="Aprendiendo">Learning</span><span data-en="Coding" data-es="Programación">Coding</span></p>
+            <div class="rightnow-slot tape" data-draggable tabindex="0" style="--base-rotate:-4deg">
+              <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder for a photo or sticker about learning to code" data-en="Placeholder for a photo or sticker about learning to code" data-es="Marcador de posición para una foto o pegatina sobre aprender a programar">
+                <!-- assets/stickers/right-now-learning.webp -->
+                <span class="showcase-placeholder-label" aria-hidden="true" data-en="soon" data-es="pronto">soon</span>
+              </div>
+            </div>
+          </div>
+          <div class="rightnow-row">
+            <p class="rightnow-text"><span class="rightnow-label" data-en="Watching" data-es="Viendo">Watching</span><span data-en="The West Wing" data-es="The West Wing">The West Wing</span></p>
+            <div class="rightnow-slot tape" data-draggable tabindex="0" style="--base-rotate:3deg">
+              <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder for a photo or sticker about watching The West Wing" data-en="Placeholder for a photo or sticker about watching The West Wing" data-es="Marcador de posición para una foto o pegatina sobre ver The West Wing">
+                <!-- assets/stickers/right-now-watching.webp -->
+                <span class="showcase-placeholder-label" aria-hidden="true" data-en="soon" data-es="pronto">soon</span>
+              </div>
+            </div>
+          </div>
+          <div class="rightnow-row">
+            <p class="rightnow-text"><span class="rightnow-label" data-en="Reading" data-es="Leyendo">Reading</span><span data-en="El Túnel, Ernesto Sábato" data-es="El Túnel, Ernesto Sábato">El Túnel, Ernesto Sábato</span></p>
+            <div class="rightnow-slot tape" data-draggable tabindex="0" style="--base-rotate:-3deg">
+              <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder for a photo or sticker about reading El Túnel" data-en="Placeholder for a photo or sticker about reading El Túnel" data-es="Marcador de posición para una foto o pegatina sobre leer El Túnel">
+                <!-- assets/stickers/right-now-reading.webp -->
+                <span class="showcase-placeholder-label" aria-hidden="true" data-en="soon" data-es="pronto">soon</span>
+              </div>
+            </div>
+          </div>
+          <div class="rightnow-row">
+            <p class="rightnow-text"><span class="rightnow-label" data-en="Eating" data-es="Comiendo">Eating</span><span data-en="Katana, Japanese-Peruvian fusion" data-es="Katana, fusión nikkei">Katana, Japanese-Peruvian fusion</span></p>
+            <div class="rightnow-slot tape" data-draggable tabindex="0" style="--base-rotate:4deg">
+              <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder for a photo or sticker about eating at Katana" data-en="Placeholder for a photo or sticker about eating at Katana" data-es="Marcador de posición para una foto o pegatina sobre comer en Katana">
+                <!-- assets/stickers/right-now-eating.webp -->
+                <span class="showcase-placeholder-label" aria-hidden="true" data-en="soon" data-es="pronto">soon</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 2: now-playing music swiper -->
+      <div class="player-card card tape" style="transform: rotate(1.5deg)">
+        <p class="player-label" data-en="NOW PLAYING" data-es="SONANDO AHORA">NOW PLAYING</p>
+        <div class="player-body">
+          <button type="button" class="player-arrow player-arrow--prev" aria-label="Previous track" data-en="Previous track" data-es="Canción anterior">&lsaquo;</button>
+          <div class="player-viewport" tabindex="0" role="group" aria-label="Album swiper" data-en="Album swiper" data-es="Selector de álbumes">
+            <div class="player-track" id="player-track">
+              <div class="album-frame">
+                <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder cover art for No One Knows by Queens of the Stone Age" data-en="Placeholder cover art for No One Knows by Queens of the Stone Age" data-es="Marcador de posición para la portada de No One Knows, de Queens of the Stone Age">
+                  <!-- assets/music/track-1.webp -->
+                  <span class="showcase-placeholder-label" aria-hidden="true" data-en="cover coming soon" data-es="portada próximamente">cover coming soon</span>
+                </div>
+                <p class="album-caption" data-en="No One Knows — Queens of the Stone Age" data-es="No One Knows — Queens of the Stone Age">No One Knows — Queens of the Stone Age</p>
+              </div>
+              <div class="album-frame">
+                <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder cover art for EoO by Bad Bunny" data-en="Placeholder cover art for EoO by Bad Bunny" data-es="Marcador de posición para la portada de EoO, de Bad Bunny">
+                  <!-- assets/music/track-2.webp -->
+                  <span class="showcase-placeholder-label" aria-hidden="true" data-en="cover coming soon" data-es="portada próximamente">cover coming soon</span>
+                </div>
+                <p class="album-caption" data-en="EoO — Bad Bunny" data-es="EoO — Bad Bunny">EoO — Bad Bunny</p>
+              </div>
+              <div class="album-frame">
+                <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder cover art for Breakfast in America by Supertramp" data-en="Placeholder cover art for Breakfast in America by Supertramp" data-es="Marcador de posición para la portada de Breakfast in America, de Supertramp">
+                  <!-- assets/music/track-3.webp -->
+                  <span class="showcase-placeholder-label" aria-hidden="true" data-en="cover coming soon" data-es="portada próximamente">cover coming soon</span>
+                </div>
+                <p class="album-caption" data-en="Breakfast in America — Supertramp" data-es="Breakfast in America — Supertramp">Breakfast in America — Supertramp</p>
+              </div>
+              <div class="album-frame">
+                <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder cover art for Entombed by Deftones" data-en="Placeholder cover art for Entombed by Deftones" data-es="Marcador de posición para la portada de Entombed, de Deftones">
+                  <!-- assets/music/track-4.webp -->
+                  <span class="showcase-placeholder-label" aria-hidden="true" data-en="cover coming soon" data-es="portada próximamente">cover coming soon</span>
+                </div>
+                <p class="album-caption" data-en="Entombed — Deftones" data-es="Entombed — Deftones">Entombed — Deftones</p>
+              </div>
+              <div class="album-frame">
+                <div class="showcase-placeholder showcase-placeholder--square" role="img" aria-label="Placeholder cover art for My Kink Is Karma by Chappell Roan" data-en="Placeholder cover art for My Kink Is Karma by Chappell Roan" data-es="Marcador de posición para la portada de My Kink Is Karma, de Chappell Roan">
+                  <!-- assets/music/track-5.webp -->
+                  <span class="showcase-placeholder-label" aria-hidden="true" data-en="cover coming soon" data-es="portada próximamente">cover coming soon</span>
+                </div>
+                <p class="album-caption" data-en="My Kink Is Karma — Chappell Roan" data-es="My Kink Is Karma — Chappell Roan">My Kink Is Karma — Chappell Roan</p>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="player-arrow player-arrow--next" aria-label="Next track" data-en="Next track" data-es="Siguiente canción">&rsaquo;</button>
+        </div>
+        <div class="player-dots" role="tablist" aria-label="Track position">
+          <button type="button" class="player-dot is-active" data-index="0" aria-label="Track 1"></button>
+          <button type="button" class="player-dot" data-index="1" aria-label="Track 2"></button>
+          <button type="button" class="player-dot" data-index="2" aria-label="Track 3"></button>
+          <button type="button" class="player-dot" data-index="3" aria-label="Track 4"></button>
+          <button type="button" class="player-dot" data-index="4" aria-label="Track 5"></button>
+        </div>
+        <p class="margin-note player-note" data-en="i listen to everything,, really" data-es="escucho de todo,, en serio">i listen to everything,, really</p>
+      </div>
+
+    </div>
+
+    <!-- Block 3: self-quiz -->
+    <div class="quiz-block">
+      <h3 class="section-header">
+        <span class="sr-only" data-en="The Quiz, Answered Honestly" data-es="El Test, Respondido Con Honestidad">The Quiz, Answered Honestly</span>
+        <span class="cutout-header cutout-header--sm" aria-hidden="true" data-en="THE QUIZ, ANSWERED HONESTLY" data-es="EL TEST, RESPONDIDO CON HONESTIDAD"></span>
+      </h3>
+      <div class="quiz-items">
+        <div class="quiz-item card torn-1" style="transform: rotate(-2deg)">
+          <p class="quiz-q" data-en="Morning person or night owl?" data-es="¿Madrugadora o búho nocturno?">Morning person or night owl?</p>
+          <p class="quiz-a" data-en="Night owl" data-es="Búho nocturno">Night owl</p>
+        </div>
+        <div class="quiz-item card torn-2" style="transform: rotate(2deg)">
+          <p class="quiz-q" data-en="A tool you would defend in an argument?" data-es="¿Una herramienta que defenderías en una discusión?">A tool you would defend in an argument?</p>
+          <p class="quiz-a" data-en="Claude. I call her Claudia." data-es="Claude. La llamo Claudia.">Claude. I call her Claudia.</p>
+        </div>
+        <div class="quiz-item card torn-3" style="transform: rotate(-3deg)">
+          <p class="quiz-q" data-en="Something you are bad at?" data-es="¿Algo que se te da mal?">Something you are bad at?</p>
+          <p class="quiz-a" data-en="Sp3lling" data-es="La 0rtografía">Sp3lling</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Block 4: sticker pile -->
+    <div class="sticker-pile-wrap">
+      <div class="sticker-pile">
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:-8deg; top:2%; left:4%; background:var(--red);" aria-label="Star sticker, draggable" data-en="Star sticker, draggable" data-es="Pegatina de estrella, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 L14.5 9 L22 9.5 L16 14.5 L18 22 L12 17.5 L6 22 L8 14.5 L2 9.5 L9.5 9 Z" fill="var(--paper-2)"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:6deg; top:6%; left:20%; background:var(--cyan);" aria-label="Heart sticker, draggable" data-en="Heart sticker, draggable" data-es="Pegatina de corazón, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21s-7-4.35-9.5-8.5C.5 8 3 4 7 4c2 0 3.5 1.2 5 3 1.5-1.8 3-3 5-3 4 0 6.5 4 4.5 8.5C19 16.65 12 21 12 21z" fill="var(--paper-2)"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:-5deg; top:0%; left:36%; background:var(--hot);" aria-label="Lightning bolt sticker, draggable" data-en="Lightning bolt sticker, draggable" data-es="Pegatina de rayo, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 2 L4 14 h6 l-2 8 9-13 h-6 z" fill="var(--paper-2)"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:9deg; top:10%; left:50%; background:var(--acid);" aria-label="Smiley face sticker, draggable" data-en="Smiley face sticker, draggable" data-es="Pegatina de carita feliz, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" fill="none" stroke="var(--paper-2)" stroke-width="2"/><circle cx="8.5" cy="10" r="1.3" fill="var(--paper-2)"/><circle cx="15.5" cy="10" r="1.3" fill="var(--paper-2)"/><path d="M7 15c1.5 2 8.5 2 10 0" stroke="var(--paper-2)" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:-6deg; top:4%; left:66%; background:var(--ink);" aria-label="Music note sticker, draggable" data-en="Music note sticker, draggable" data-es="Pegatina de nota musical, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="7" cy="18" r="3" fill="var(--paper-2)"/><circle cx="17" cy="16" r="3" fill="var(--paper-2)"/><path d="M10 18V5l10-2v11" stroke="var(--paper-2)" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:5deg; top:14%; left:80%; background:var(--red);" aria-label="Camera sticker, draggable" data-en="Camera sticker, draggable" data-es="Pegatina de cámara, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="7" width="18" height="13" fill="none" stroke="var(--paper-2)" stroke-width="2"/><path d="M8 7 L10 4 h4 l2 3" stroke="var(--paper-2)" stroke-width="2" fill="none"/><circle cx="12" cy="13.5" r="4" fill="none" stroke="var(--paper-2)" stroke-width="2"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:-9deg; top:22%; left:10%; background:var(--cyan);" aria-label="Speech bubble sticker, draggable" data-en="Speech bubble sticker, draggable" data-es="Pegatina de globo de diálogo, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 5h18v10H9l-4 4v-4H3z" fill="none" stroke="var(--paper-2)" stroke-width="2" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:7deg; top:26%; left:28%; background:var(--hot);" aria-label="Paperclip sticker, draggable" data-en="Paperclip sticker, draggable" data-es="Pegatina de clip, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 12V6a4 4 0 0 1 8 0v10a2.5 2.5 0 0 1-5 0V8" fill="none" stroke="var(--paper-2)" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:-4deg; top:20%; left:46%; background:var(--acid);" aria-label="Checkmark sticker, draggable" data-en="Checkmark sticker, draggable" data-es="Pegatina de check, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12 l6 6 L20 6" fill="none" stroke="var(--paper-2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="sticker" data-draggable tabindex="0" style="--base-rotate:4deg; top:28%; left:62%; background:var(--ink);" aria-label="Sparkle sticker, draggable" data-en="Sparkle sticker, draggable" data-es="Pegatina de destello, para arrastrar">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2 l1.5 7L21 12l-7.5 3L12 22l-1.5-7L3 12l7.5-3z" fill="var(--paper-2)"/></svg>
+        </div>
+      </div>
+      <p class="margin-note sticker-note" data-en="move them around and decorate!" data-es="¡muévelos y decora!">move them around and decorate!</p>
+    </div>
+
+  </section>
+
+  <!-- ===================================================================
+       SPREAD 08 — placeholder, built out in the next pass
+       =================================================================== -->
+  <section class="spread spread--stub" id="spread-08" data-hash="#/contact" data-page="08" data-section-en="Let's Talk" data-section-es="Hablemos">
+    <div class="stub-card card torn-2 tape">
+      <h2 class="stub-title" data-en="Let's Talk" data-es="Hablemos">Let's Talk</h2>
+      <p data-en="This spread is being built next." data-es="Esta sección se está armando.">This spread is being built next.</p>
+      <a class="stub-back" href="#/contents" data-en="← Back to contents" data-es="← Volver al índice">← Back to contents</a>
+    </div>
+  </section>
+
+</main>
+
+<button type="button" id="page-prev" class="page-turn page-turn--prev"
+  aria-label="Previous page" data-en="Previous page" data-es="Página anterior" hidden>
+  <span aria-hidden="true">&lsaquo;</span>
+</button>
+<button type="button" id="page-next" class="page-turn page-turn--next"
+  aria-label="Next page" data-en="Next page" data-es="Página siguiente">
+  <span aria-hidden="true">&rsaquo;</span>
+</button>
+
+<footer class="footer-strip">
+  <span class="page-num">00</span>
+  <span class="section-name">Cover</span>
+  <div class="barcode-mini" aria-hidden="true"></div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>
